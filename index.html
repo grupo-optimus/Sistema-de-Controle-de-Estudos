@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Optimus Study — sistema acadêmico de controle de estudos do Grupo Optimus.">
+  <meta name="author" content="Grupo Optimus">
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <title>Optimus Study | Grupo Optimus</title>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#inicio" aria-label="Optimus Study — início">
+        <img src="img/logo.svg" alt="Logo do Grupo Optimus">
+        <span class="brand-copy">
+          <strong>Optimus Study</strong>
+          <small>Grupo Optimus · UniAmérica</small>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="#inicio">Início</a>
+        <a href="#cadastro">Cadastrar</a>
+        <a href="#disciplinas">Disciplinas</a>
+      </nav>
+
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar tema escuro" title="Alternar tema">
+        <span id="themeIcon" aria-hidden="true">☾</span>
+        <span id="themeLabel">Tema escuro</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">SISTEMA ACADÊMICO</span>
+          <h1>Organize seus estudos com <span>clareza</span>.</h1>
+          <p>
+            Registre disciplinas, acompanhe suas horas de estudo e mantenha seu progresso
+            salvo diretamente no navegador.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#cadastro">Cadastrar disciplina</a>
+            <a class="button button-secondary" href="#disciplinas">Ver disciplinas</a>
+          </div>
+          <div class="hero-note">
+            <span class="note-dot"></span>
+            Dados armazenados localmente com <strong>localStorage</strong>.
+          </div>
+        </div>
+
+        <aside class="hero-panel" aria-label="Resumo dos estudos">
+          <div class="panel-heading">
+            <span>PAINEL DE ESTUDOS</span>
+            <span class="status-dot"><i></i> ativo</span>
+          </div>
+          <div class="metric-grid">
+            <div class="metric">
+              <span>Disciplinas</span>
+              <strong id="totalDisciplinas">0</strong>
+            </div>
+            <div class="metric">
+              <span>Concluídas</span>
+              <strong id="totalConcluidas">0</strong>
+            </div>
+            <div class="metric metric-wide">
+              <span>Horas estudadas</span>
+              <strong><span id="totalHoras">0</span>h</strong>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <span>Seu progresso acompanha você.</span>
+            <strong>OPTIMUS</strong>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <div class="container workspace-grid">
+        <section class="card form-card" id="cadastro" aria-labelledby="cadastroTitulo">
+          <div class="section-heading">
+            <div>
+              <span class="section-kicker">CADASTRO</span>
+              <h2 id="cadastroTitulo">Adicionar disciplina</h2>
+            </div>
+            <span class="section-mark" aria-hidden="true">+</span>
+          </div>
+
+          <form id="formDisciplina" novalidate>
+            <div class="field">
+              <label for="nomeDisciplina">Nome da disciplina</label>
+              <input id="nomeDisciplina" name="nome" type="text" maxlength="80"
+                     placeholder="Ex.: Programação" autocomplete="off" required>
+            </div>
+
+            <div class="field">
+              <label for="horasEstudadas">Horas estudadas</label>
+              <input id="horasEstudadas" name="horas" type="number" min="0" step="0.5"
+                     placeholder="Ex.: 10" required>
+            </div>
+
+            <p class="form-feedback" id="formFeedback" role="alert" aria-live="polite"></p>
+
+            <button class="button button-primary button-full" type="submit">
+              Adicionar disciplina
+            </button>
+          </form>
+
+          <div class="academic-hint">
+            <strong>Estrutura do exercício</strong>
+            <span>Objeto → array de objetos → JSON → localStorage</span>
+          </div>
+        </section>
+
+        <section class="card info-card" aria-labelledby="funcionaTitulo">
+          <div class="section-heading">
+            <div>
+              <span class="section-kicker">CONTROLE</span>
+              <h2 id="funcionaTitulo">Como funciona</h2>
+            </div>
+          </div>
+
+          <div class="steps">
+            <article class="step">
+              <span class="step-icon" aria-hidden="true">+</span>
+              <div>
+                <strong>Cadastre</strong>
+                <p>Informe a disciplina e a quantidade de horas estudadas.</p>
+              </div>
+            </article>
+            <article class="step">
+              <span class="step-icon" aria-hidden="true">↗</span>
+              <div>
+                <strong>Acompanhe</strong>
+                <p>Altere o status quando terminar ou retomar uma disciplina.</p>
+              </div>
+            </article>
+            <article class="step">
+              <span class="step-icon" aria-hidden="true">✓</span>
+              <div>
+                <strong>Persista</strong>
+                <p>As alterações permanecem mesmo depois de atualizar a página.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="disciplines-section" id="disciplinas" aria-labelledby="disciplinasTitulo">
+      <div class="container">
+        <div class="list-heading">
+          <div>
+            <span class="section-kicker">ACOMPANHAMENTO</span>
+            <h2 id="disciplinasTitulo">Minhas disciplinas</h2>
+            <p>Veja suas matérias, horas registradas e andamento.</p>
+          </div>
+          <span class="count-badge" id="countBadge">0 disciplinas</span>
+        </div>
+
+        <div class="discipline-list" id="listaDisciplinas" aria-live="polite"></div>
+
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon" aria-hidden="true">◈</div>
+          <h3>Nenhuma disciplina cadastrada</h3>
+          <p>Comece adicionando sua primeira disciplina para acompanhar seu progresso.</p>
+          <a class="button button-secondary" href="#cadastro">Adicionar agora</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <img src="img/logo.svg" alt="Logo do Grupo Optimus">
+          <div>
+            <strong>Grupo Optimus</strong>
+            <p>Projetos acadêmicos, tecnologia e desenvolvimento.</p>
+          </div>
+        </div>
+
+        <div class="footer-product">
+          <span class="footer-label">PROJETO</span>
+          <strong>Optimus Study</strong>
+          <p>Sistema de Controle de Estudos</p>
+        </div>
+
+        <div class="footer-tech">
+          <span class="footer-label">TECNOLOGIAS</span>
+          <div class="tech-list">
+            <span>HTML5</span>
+            <span>CSS3</span>
+            <span>JavaScript</span>
+            <span>localStorage</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-strip" aria-label="Equipe do Grupo Optimus">
+        <div class="team-title">
+          <span>EQUIPE OPTIMUS</span>
+          <small>UniAmérica</small>
+        </div>
+        <div class="team-avatars">
+          <img src="img/zainab-ghazaoui.jpg" alt="Zainab Ghazaoui">
+          <img src="img/andre-castelhano.jpg" alt="André Castelhano">
+          <img src="img/carlos-menger.jpg" alt="Carlos Menger">
+          <img src="img/caue-hanzen.jpg" alt="Cauê Hanzen">
+          <img src="img/guilherme-bonetto.jpg" alt="Guilherme Bonetto">
+          <img src="img/pedro-perdomo.jpg" alt="Pedro Perdomo">
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Grupo Optimus · UniAmérica</span>
+        <span>Dados deste sistema permanecem no seu navegador.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
